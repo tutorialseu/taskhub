@@ -1,0 +1,48 @@
+﻿@model IEnumerable<UserTask>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="container">
+    <div class="row">
+        <h2 class="text-primary">User Task List</h2>
+    </div>
+
+    <hr />
+    @* Checks if the Logged user has an Admin role if yes then the Create button will appear. *@
+    @if (User.IsInRole("Admin"))
+    {
+        <div class="row">
+            <div>
+                <a asp-controller="UserTask" asp-action="Create" class="btn btn-primary">
+                    Create Task
+                </a>
+            </div>
+        </div>
+    }
+
+    <br />
+
+    @foreach (var task in Model)
+    {
+        <div class="card mb-3">
+            <h4 class="card-header"><b>@task.Title</b></h4>
+            <div class="card-body">
+                <h5 class="card-title">@task.Description</h5>
+                <p>Assigned To: <b>@task.AssignedTo.FullName</b></p>
+                <p>Status To: <b>@task.Status</b></p>
+                <p>Date: <i>@task.CreatedDate</i></p>
+            </div>
+
+            <div class="card-footer">
+                <a asp-action="Edit" asp-route-id="@task.TaskId" asp-controller="UserTask" class="btn btn-primary">Update Status</a>
+
+                @* Checks if the Logged user has an Admin role if yes then the Delete button will appear. *@
+                @if (User.IsInRole("Admin"))
+                {
+                    <a asp-action="Delete" asp-route-id="@task.TaskId" asp-controller="UserTask" class="btn btn-danger">Delete</a>
+                }
+            </div>
+        </div>
+    }
+</div>

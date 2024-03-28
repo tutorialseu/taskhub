@@ -1,0 +1,36 @@
+﻿@using TaskHub.Models.ModelViews
+@model IEnumerable<ApplicationUserView>
+
+@{
+    ViewData["Title"] = "Index";
+}
+<div class="container">
+    <div class="row">
+        <h2 class="text-primary">Application User List</h2>
+    </div>
+
+    <hr />
+    <div class="row">
+        @* Creates a button that will redirect to the create a user *@
+        <div>
+            <a asp-controller="ApplicationUser" asp-action="Create" class="btn btn-primary">
+                Create User
+            </a>
+        </div>
+    </div>
+    <br />
+    @* Loops through all the list of users. *@
+    @foreach (var item in Model)
+    {
+        <div class="card mb-3">
+            <h5 class="card-header">Id: <b>@item.Id</b></h5>
+            <div class="card-body">
+                <h5 class="card-title">Name: <b>@item.FirstName, @item.LastName</b></h5>
+            </div>
+
+        </div>
+    }
+</div>
+
+
+

@@ -1,0 +1,54 @@
+﻿@model UserTask
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+
+<div class="row">
+    <h2 class="text-primary">Update User Task Status</h2>
+</div>
+
+<hr />
+<div class="row">
+    <div class="col-md-6">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="TaskId" />
+            <input type="hidden" asp-for="CreatedDate" />
+            <div class="mb-3">
+                Task Title: <label asp-for="Title" class="control-label"><b>@Model.Title</b></label>
+                <input type="hidden" asp-for="Title" />
+            </div>
+            <div class="mb-3">
+                Task Description: <label asp-for="Description" class="control-label"><b>@Model.Description</b></label>
+                <input type="hidden" asp-for="Description" />
+            </div>
+            <div class="mb-3">
+                Assign To:  <label asp-for="AssignedTo" class="control-label"><b>@Model.AssignedTo.FullName</b></label>
+                <input type="hidden" asp-for="AssignedToId" />
+            </div>
+            <div class="mb-3">
+                @* Dropdown to update the Status *@
+                <div class="input-group mb-3">
+                    <span class="input-group-text" id="inputGroup-sizing-default">Status</span>
+                    <select class="form-select" id="selectDropdown" asp-for="Status" aria-label="Select Dropdown">
+                        <option value="Undone">Undone</option>
+                        <option value="In-Progress">In-Progress</option>
+                        <option value="Finished">Finished</option>
+                    </select>
+                    <span asp-validation-for="Status" class="text-danger"></span>
+                </div>
+
+                <div class="form-group">
+                    <input type="submit" value="Save" class="btn btn-primary" />
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>
+
